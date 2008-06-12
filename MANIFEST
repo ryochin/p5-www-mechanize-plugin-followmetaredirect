@@ -6,6 +6,7 @@ lib/WWW/Mechanize/Plugin/FollowMetaRedirect.pm
 t/00_load.t
 t/01_meta-format.t
 t/02_waiting.t
+t/03_compat-pluggable.t
 t/95_perl-critic.t
 t/97_pod.t
 t/98_pod-spelling.t

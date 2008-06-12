@@ -3,17 +3,18 @@
 
 use strict;
 use warnings;
-use Test::More tests => 42;
+use Test::More tests => 43;
 use URI::file;
 
 BEGIN {
-    use_ok( 'WWW::Mechanize::Pluggable' );
+    use_ok( 'WWW::Mechanize' );
     use_ok( 'WWW::Mechanize::Plugin::FollowMetaRedirect' );
+    can_ok( 'WWW::Mechanize', 'follow_meta_redirect' );
 }
 
 # success
 for my $n( 1 .. 7, 21 ){
-  my $mech = WWW::Mechanize::Pluggable->new;
+  my $mech = WWW::Mechanize->new;
   my $uri = URI::file->new_abs( sprintf "t/meta_format_%02d.html", $n )->as_string;
 
   # load initial page
@@ -21,7 +22,7 @@ for my $n( 1 .. 7, 21 ){
   ok( $mech->success, "Fetched: $uri" ) or die "cannot load test html!";
 
   # follow
-  ok( $mech->follow_meta_redirect( ignore_waiting => 1 ), "follow meta refresh link: $n" );
+  ok( $mech->follow_meta_redirect( ignore_wait => 1 ), "follow meta refresh link: $n" );
 
   # check
   ok( $mech->is_html, "is html: %n" );
@@ -30,7 +31,7 @@ for my $n( 1 .. 7, 21 ){
 
 # failure
 for my $n( 22 .. 23 ){
-  my $mech = WWW::Mechanize::Pluggable->new;
+  my $mech = WWW::Mechanize->new;
   my $uri = URI::file->new_abs( sprintf "t/meta_format_%02d.html", $n )->as_string;
 
   # load initial page
@@ -38,7 +39,7 @@ for my $n( 22 .. 23 ){
   ok( $mech->success, "Fetched: $uri" ) or die "cannot load test html!";
 
   # follow
-  ok( ! $mech->follow_meta_redirect( ignore_waiting => 1 ), "no follow meta refresh link: $n" );
+  ok( ! $mech->follow_meta_redirect( ignore_wait => 1 ), "no follow meta refresh link: $n" );
 
   # check
   ok( $mech->is_html, "is html: %n" );

@@ -1,4 +1,5 @@
-#!perl -T
+#
+# $Id$
 
 use strict;
 use warnings;

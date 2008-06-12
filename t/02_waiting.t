@@ -3,18 +3,19 @@
 
 use strict;
 use warnings;
-use Test::More tests => 17;
+use Test::More tests => 18;
 use URI::file;
 use Time::HiRes qw(time);
 
 BEGIN {
-    use_ok( 'WWW::Mechanize::Pluggable' );
+    use_ok( 'WWW::Mechanize' );
     use_ok( 'WWW::Mechanize::Plugin::FollowMetaRedirect' );
+    can_ok( 'WWW::Mechanize', 'follow_meta_redirect' );
 }
 
 # active check 1
 {
-  my $mech = WWW::Mechanize::Pluggable->new;
+  my $mech = WWW::Mechanize->new;
   my $uri = URI::file->new_abs("t/waiting_01.html")->as_string;
 
   # load initial page
@@ -24,7 +25,7 @@ BEGIN {
   # follow
   my $start = time;
   ok( $mech->follow_meta_redirect, "follow meta refresh link" );
-  ok( time - $start >= 2.00, "waiting sec" );
+  ok( time - $start >= 1.00, "waiting sec" );
 
   # check
   ok( $mech->is_html, "is html" );
@@ -33,7 +34,7 @@ BEGIN {
 
 # active check 2
 {
-  my $mech = WWW::Mechanize::Pluggable->new;
+  my $mech = WWW::Mechanize->new;
   my $uri = URI::file->new_abs("t/waiting_01.html")->as_string;
 
   # load initial page
@@ -42,8 +43,8 @@ BEGIN {
 
   # follow
   my $start = time;
-  ok( $mech->follow_meta_redirect( ignore_waiting => 0 ), "follow meta refresh link" );
-  ok( time - $start >= 2.00, "waiting sec" );
+  ok( $mech->follow_meta_redirect( ignore_wait => 0 ), "follow meta refresh link" );
+  ok( time - $start >= 1.00, "waiting sec" );
 
   # check
   ok( $mech->is_html, "is html" );
@@ -52,7 +53,7 @@ BEGIN {
 
 # negative check 1
 {
-  my $mech = WWW::Mechanize::Pluggable->new;
+  my $mech = WWW::Mechanize->new;
   my $uri = URI::file->new_abs("t/waiting_01.html")->as_string;
 
   # load initial page
@@ -61,8 +62,8 @@ BEGIN {
 
   # follow
   my $start = time;
-  ok( $mech->follow_meta_redirect( ignore_waiting => 1 ), "follow meta refresh link" );
-  ok( time - $start < 1.00, "waiting sec" );
+  ok( $mech->follow_meta_redirect( ignore_wait => 1 ), "follow meta refresh link" );
+  ok( time - $start < 0.90, "waiting sec" );
 
   # check
   ok( $mech->is_html, "is html" );

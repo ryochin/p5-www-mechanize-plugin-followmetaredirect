@@ -1,5 +1,5 @@
 #
-# $Id: 98_perl-critic.t 10 2008-05-13 08:05:45Z ryo $
+# $Id$
 
 use strict;
 use warnings;
@@ -44,3 +44,4 @@ Okamoto
 Ryo
 aquahill
 TODO
+mech

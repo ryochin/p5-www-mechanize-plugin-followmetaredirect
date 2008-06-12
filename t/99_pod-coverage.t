@@ -1,5 +1,5 @@
 #
-# $Id: 99_pod-coverage.t 10 2008-05-13 08:05:45Z ryo $
+# $Id$
 
 use strict;
 use warnings;

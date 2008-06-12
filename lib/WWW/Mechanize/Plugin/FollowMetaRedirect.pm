@@ -17,7 +17,7 @@ sub init {
 
 sub follow_meta_redirect {
     my ($mech, %args) = @_;
-    my $waiting = ( defined $args{ignore_waiting} and $args{ignore_waiting} ) ? 0 : 1;
+    my $waiting = ( defined $args{ignore_wait} and $args{ignore_wait} ) ? 0 : 1;
 
     my $p = HTML::TokeParser->new( \ $mech->content )
 	or return;
@@ -38,6 +38,8 @@ sub follow_meta_redirect {
 
     return;
 }
+
+*WWW::Mechanize::follow_meta_redirect = \&follow_meta_redirect;
 
 sub _extract {
     my $token = shift;
@@ -65,18 +67,26 @@ WWW::Mechanize::Plugin::FollowMetaRedirect - Follows 'meta refresh' link
 
 =head1 SYNOPSIS
 
-  use WWW::Mechanize::Pluggable;
+  use WWW::Mechanize;
+  use WWW::Mechanize::Plugin::FollowMetaRedirect;
 
-  my $mech = WWW::Mechanize::Pluggable->new;
+  my $mech = WWW::Mechanize->new;
   $mech->get( $url );
   $mech->follow_meta_redirect;
 
-  $mech->follow_meta_redirect( ignore_waiting => 1 );
+  # we don't want to emulate waiting time
+  $mech->follow_meta_redirect( ignore_wait => 1 );
+
+  # compatible for W::M::Pluggable
+  use WWW::Mechanize::Pluggable;
+
+  my $mech = WWW::Mechanize::Pluggable->new;
+  ...
 
 =head1 DESCRIPTION
 
 WWW::Mechanize doesn't follow so-called 'meta refresh' link.
-This module automatically find the link and follow.
+This module helps you to find the link and follow it automatically.
 
 =head1 METHODS
 
@@ -85,10 +95,10 @@ This module automatically find the link and follow.
 If $mech->content() has meta refresh element like this,
 
   <head>
-    <meta http-equiv="refresh" content="5; URL=/docs/hello.html" />
+    <meta http-equiv="Refresh" content="5; URL=/docs/hello.html" />
   </head>
 
-the code below will try to find and follow the link set on url=.
+the code below will try to find and follow the link described as url=.
 
   $mech->follow_meta_redirect;
 
@@ -97,16 +107,16 @@ In this case, the above code is entirely equivalent to:
   sleep 5;
   $mech->get("/docs/hello.html");
 
-When a refresh link found and successfully followed, HTTP::Response object will be returned (see WWW::Mechanize::follow_link() ), 
+When a refresh link found and successfully followed, HTTP::Response object will be returned (see WWW::Mechanize::get() ), 
 otherwise nothing returned.
 
-To sleep specified seconds is default when 'waiting second' found. You can ignore this by setting ignore_waiting true.
+To sleep specified seconds is default when 'waiting second' found. You can ignore this by setting ignore_wait true.
 
-  $mech->follow_meta_redirect( ignore_waiting => 1 );
+  $mech->follow_meta_redirect( ignore_wait => 1 );
 
 =head1 BUGS
 
-Only first link is picked up when the HTML document has more than one 'meta refresh' links (but I think it should be so).
+Only first link will be picked up when HTML document has more than one 'meta refresh' links (but I think it should be so).
 
 =head1 TODO
 
@@ -114,7 +124,11 @@ A bit more efficient optimization to suppress extra parsing by limiting job rang
 
 =head1 DEPENDENCIES
 
-WWW::Mechanize, WWW::Mechanize::Pluggable
+WWW::Mechanize
+
+=head1 SEE ALSO
+
+WWW::Mechanize::Pluggable
 
 =head1 AUTHOR
 

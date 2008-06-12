@@ -3,7 +3,6 @@
 
 use strict;
 use warnings;
-use lib qw(inc);
 use Module::Build;
 
 my $builder = Module::Build->new(
@@ -14,9 +13,11 @@ my $builder = Module::Build->new(
     build_requires => {
         'Test::More' => 0,
 	'Time::HiRes' => 0,
-	'HTML::TokeParser' => 1,
-	'WWW::Mechanize' => 1,
-	'WWW::Mechanize::Pluggable' => 1,
+	'URI' => 0,
+    },
+    requires => {
+	'HTML::TokeParser' => 0,
+	'WWW::Mechanize' => 0,
     },
     add_to_cleanup      => [ 'WWW-Mechanize-Plugin-FollowMetaRedirect-*' ],
     create_makefile_pl => 'traditional',
