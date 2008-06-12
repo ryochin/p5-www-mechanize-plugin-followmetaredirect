@@ -86,13 +86,13 @@ WWW::Mechanize::Plugin::FollowMetaRedirect - Follows 'meta refresh' link
 =head1 DESCRIPTION
 
 WWW::Mechanize doesn't follow so-called 'meta refresh' link.
-This module helps you to find the link and follow it automatically.
+This module helps you to find the link and follow it easily.
 
 =head1 METHODS
 
-=head2 follow_meta_redirect
+=head2 $mech->follow_meta_redirect
 
-If $mech->content() has meta refresh element like this,
+If $mech->content() has a 'meta refresh' element like this,
 
   <head>
     <meta http-equiv="Refresh" content="5; URL=/docs/hello.html" />
@@ -107,22 +107,27 @@ In this case, the above code is entirely equivalent to:
   sleep 5;
   $mech->get("/docs/hello.html");
 
-When a refresh link found and successfully followed, HTTP::Response object will be returned (see WWW::Mechanize::get() ), 
+When a refresh link was found and successfully followed, HTTP::Response object will be returned (see WWW::Mechanize::get() ), 
 otherwise nothing returned.
 
-To sleep specified seconds is default when 'waiting second' found. You can ignore this by setting ignore_wait true.
+To sleep specified seconds is default if 'waiting second' was set. You can omit the meddling function by passing ignore_wait true.
 
   $mech->follow_meta_redirect( ignore_wait => 1 );
 
 =head1 BUGS
 
+Despite there was no efficient links on the document after issuing follow_meta_redirect(),
+$mech->is_success will still return true because the method did really nothing, and the former page would be loaded correctly (or why you proceed to follow?).
+
 Only first link will be picked up when HTML document has more than one 'meta refresh' links (but I think it should be so).
 
-=head1 TODO
+=head1 TO DO
 
 A bit more efficient optimization to suppress extra parsing by limiting job range within <head></head> region.
 
-=head1 DEPENDENCIES
+To implement auto follow feature (like $mech->auto_follow_meta_redirect(1) ) using W::M::Pluggable::post_hook() to W::M::get().
+
+=head1 DEPENDENCY
 
 WWW::Mechanize
 

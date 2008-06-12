@@ -23,3 +23,5 @@ t/meta_format_22.html
 t/meta_format_23.html
 t/result.html
 t/waiting_01.html
+Makefile.PL
+META.yml
