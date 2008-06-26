@@ -1,5 +1,8 @@
 Revision history for WWW-Mechanize-Plugin-FollowMetaRedirect
 
+0.02
+	simplified test html files.
+
 0.01    Thu Jun 12 16:34:57 2008
         First release.
 

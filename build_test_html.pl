@@ -15,13 +15,16 @@ my @t = (
   q|<meta http-equiv="Refresh" content="url=result.html" />|,
   q|<meta http-equiv="Refresh" content="URL=result.html" />|,
   q|<meta http-equiv="Refresh" content="0;url=./result.html" />|,
+  q|<meta http-equiv="Refresh" content="0;url=result.html?q=user%20example.com+perl&amp;foo=bar" />|,
 );
 
 my $html = do { local $/; <DATA> };
 
 my $n = 0;
 for my $t( @t ){
-  my $file = File::Spec->join("t", sprintf "meta_format_%02d.html", ++$n);
+  $n++;
+  next if $n == 1;    # for complicated html
+  my $file = File::Spec->join("t", sprintf "meta_format_%02d.html", $n);
 
   my $fh = IO::File->new;
   $fh->open("> $file") or die $!;
@@ -30,20 +33,12 @@ for my $t( @t ){
 }
 
 __DATA__
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en-US" xml:lang="en-US" xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-<link rev="made" href="mailto:webmaster&#64;example.com" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 %s
 <meta name="robots" content="noindex,nofollow" />
-<title>test</title>
 </head>
 <body>
-<p>
-test.
-</p>
 </body>
 </html>
 

@@ -8,11 +8,11 @@ use warnings "all";
 use vars qw($VERSION);
 use HTML::TokeParser;
 
-$VERSION = '0.01';
+$VERSION = '0.01_01';
 
 sub init {
-   no strict 'refs';    ## no critic
-   *{caller(). '::follow_meta_redirect'} = \&follow_meta_redirect;
+    no strict 'refs';    ## no critic
+    *{caller(). '::follow_meta_redirect'} = \&follow_meta_redirect;
 }
 
 sub follow_meta_redirect {
@@ -119,7 +119,7 @@ To sleep specified seconds is default if 'waiting second' was set. You can omit 
 Despite there was no efficient links on the document after issuing follow_meta_redirect(),
 $mech->is_success will still return true because the method did really nothing, and the former page would be loaded correctly (or why you proceed to follow?).
 
-Only first link will be picked up when HTML document has more than one 'meta refresh' links (but I think it should be so).
+Only the first link will be picked up when HTML document has more than one 'meta refresh' links (but I think it should be so).
 
 =head1 TO DO
 
