@@ -12,10 +12,11 @@ my @t = (
   q|<META HTTP-EQUIV="REFRESH" CONTENT="0;URL=result.html" />|,
   q|<meta http-equiv="Refresh" content="10;url=result.html" />|,
   q|<meta http-equiv="Refresh" content="10;    url=result.html" />|,
+  q|<meta http-equiv="Refresh" content="10    ;    url=result.html" />|,
   q|<meta http-equiv="Refresh" content="url=result.html" />|,
   q|<meta http-equiv="Refresh" content="URL=result.html" />|,
   q|<meta http-equiv="Refresh" content="0;url=./result.html" />|,
-  q|<meta http-equiv="Refresh" content="0;url=result.html?q=user%20example.com+perl&amp;foo=bar" />|,
+  q|<meta http-equiv="Refresh" content="0;url=result.html?q=user%20example.com+perl&amp;foo=bar" />|,    # skip test
 );
 
 my $html = do { local $/; <DATA> };

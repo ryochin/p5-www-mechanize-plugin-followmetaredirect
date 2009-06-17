@@ -3,7 +3,7 @@
 
 use strict;
 use warnings;
-use Test::More tests => 43;
+use Test::More tests => 47;
 use URI::file;
 
 BEGIN {
@@ -13,7 +13,7 @@ BEGIN {
 }
 
 # success
-for my $n( 1 .. 7, 21 ){
+for my $n( 1 .. 8, 21 ){
   my $mech = WWW::Mechanize->new;
   my $uri = URI::file->new_abs( sprintf "t/meta_format_%02d.html", $n )->as_string;
 
@@ -25,7 +25,7 @@ for my $n( 1 .. 7, 21 ){
   ok( $mech->follow_meta_redirect( ignore_wait => 1 ), "follow meta refresh link: $n" );
 
   # check
-  ok( $mech->is_html, "is html: %n" );
+  ok( $mech->is_html, "is html: $n" );
   ok( $mech->content =~ /test ok\./, "result html: $n" );
 }
 
@@ -42,7 +42,7 @@ for my $n( 22 .. 23 ){
   ok( ! $mech->follow_meta_redirect( ignore_wait => 1 ), "no follow meta refresh link: $n" );
 
   # check
-  ok( $mech->is_html, "is html: %n" );
+  ok( $mech->is_html, "is html: $n" );
   ok( $mech->content !~ /test ok\./, "result html not loaded: $n" );
 }
 
