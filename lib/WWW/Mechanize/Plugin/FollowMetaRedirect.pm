@@ -12,7 +12,7 @@ $VERSION = '0.01_01';
 
 sub init {
     no strict 'refs';    ## no critic
-    *{caller(). '::follow_meta_redirect'} = \&follow_meta_redirect;
+    *{caller() . '::follow_meta_redirect'} = \&follow_meta_redirect;
 }
 
 sub follow_meta_redirect {
@@ -23,8 +23,8 @@ sub follow_meta_redirect {
 	or return;
 
     while( my $token = $p->get_token ){
-	# for tiny optimization
-	return if $token->[0] eq 'E' && $token->[1] eq 'head';
+	# the line should emerge before </head>
+	last if $token->[0] eq 'E' && $token->[1] eq 'head';
 	
 	my ($url, $sec) = &_extract( $token );
 	next if ! defined $url || $url eq '';
