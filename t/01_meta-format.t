@@ -1,9 +1,6 @@
-# 
-# $Id$
-
 use strict;
 use warnings;
-use Test::More tests => 47;
+use Test::More;
 use URI::file;
 
 BEGIN {
@@ -13,9 +10,9 @@ BEGIN {
 }
 
 # success
-for my $n( 1 .. 8, 21 ){
+for my $n( 1 .. 13, 21 ){
   my $mech = WWW::Mechanize->new;
-  my $uri = URI::file->new_abs( sprintf "t/meta_format_%02d.html", $n )->as_string;
+  my $uri = URI::file->new_abs( sprintf "t/assets/meta_format_%02d.html", $n )->as_string;
 
   # load initial page
   $mech->get( $uri );
@@ -32,7 +29,7 @@ for my $n( 1 .. 8, 21 ){
 # failure
 for my $n( 22 .. 23 ){
   my $mech = WWW::Mechanize->new;
-  my $uri = URI::file->new_abs( sprintf "t/meta_format_%02d.html", $n )->as_string;
+  my $uri = URI::file->new_abs( sprintf "t/assets/meta_format_%02d.html", $n )->as_string;
 
   # load initial page
   $mech->get( $uri );
@@ -46,3 +43,6 @@ for my $n( 22 .. 23 ){
   ok( $mech->content !~ /test ok\./, "result html not loaded: $n" );
 }
 
+done_testing;
+
+__END__

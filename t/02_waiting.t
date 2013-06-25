@@ -1,9 +1,6 @@
-# 
-# $Id$
-
 use strict;
 use warnings;
-use Test::More tests => 18;
+use Test::More;
 use URI::file;
 use Time::HiRes qw(time);
 
@@ -16,7 +13,7 @@ BEGIN {
 # active check 1
 {
   my $mech = WWW::Mechanize->new;
-  my $uri = URI::file->new_abs("t/waiting_01.html")->as_string;
+  my $uri = URI::file->new_abs("t/assets/waiting_01.html")->as_string;
 
   # load initial page
   $mech->get( $uri );
@@ -35,7 +32,7 @@ BEGIN {
 # active check 2
 {
   my $mech = WWW::Mechanize->new;
-  my $uri = URI::file->new_abs("t/waiting_01.html")->as_string;
+  my $uri = URI::file->new_abs("t/assets/waiting_01.html")->as_string;
 
   # load initial page
   $mech->get( $uri );
@@ -54,7 +51,7 @@ BEGIN {
 # negative check 1
 {
   my $mech = WWW::Mechanize->new;
-  my $uri = URI::file->new_abs("t/waiting_01.html")->as_string;
+  my $uri = URI::file->new_abs("t/assets/waiting_01.html")->as_string;
 
   # load initial page
   $mech->get( $uri );
@@ -70,3 +67,6 @@ BEGIN {
   ok( $mech->content =~ /test ok\./, "result html" );
 }
 
+done_testing;
+
+__END__

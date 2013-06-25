@@ -1,14 +1,13 @@
 # 
-# $Id$
 
 package WWW::Mechanize::Plugin::FollowMetaRedirect;
 
 use strict;
-use warnings "all";
+use warnings;
 use vars qw($VERSION);
 use HTML::TokeParser;
 
-$VERSION = '0.01_01';
+$VERSION = '0.02';
 
 sub init {
     no strict 'refs';    ## no critic
@@ -47,7 +46,7 @@ sub _extract {
     if( $token->[0] eq 'S' and $token->[1] eq 'meta' ){
 	if( defined $token->[2] and ref $token->[2] eq 'HASH' ){
 	    if( defined $token->[2]->{'http-equiv'} and $token->[2]->{'http-equiv'} =~ /^refresh$/io ){
-		if( defined $token->[2]->{'content'} and $token->[2]->{'content'} =~ m|^(([0-9]+)\s*;\s*)*url\=(.+)$|io ){
+		if( defined $token->[2]->{'content'} and $token->[2]->{'content'} =~ m|^(([0-9]+)\s*;\s*)*url\='?([^']+)'?$|io ){
 		    return ($3, $2);
 		}
 	    }
@@ -60,6 +59,8 @@ sub _extract {
 1;
 
 __END__
+
+=encoding utf-8
 
 =head1 NAME
 
@@ -135,14 +136,19 @@ WWW::Mechanize
 
 WWW::Mechanize, WWW::Mechanize::Pluggable
 
+=head1 REPOSITORY
+
+https://github.com/ryochin/p5-www-mechanize-plugin-followmetaredirect
+
 =head1 AUTHOR
 
-Ryo Okamoto C<< <ryo at aquahill dot net> >>
+Ryo Okamoto E<lt>ryo@aquahill.netE<gt>
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2008 Ryo Okamoto, all rights reserved.
+Copyright (c) Ryo Okamoto, all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
 
+=cut

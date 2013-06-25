@@ -1,6 +1,3 @@
-# 
-# $Id$
-
 use strict;
 use warnings;
 use Test::More;
@@ -11,13 +8,11 @@ if( $@ ){
     plan skip_all => "we don't have WWW::Mechanize::Pluggable";
 }
 else{
-    plan tests => 6;
-
     use_ok( 'WWW::Mechanize::Pluggable' );
     can_ok( 'WWW::Mechanize', 'follow_meta_redirect' );
 
     my $mech = WWW::Mechanize::Pluggable->new;
-    my $uri = URI::file->new_abs("t/meta_format_01.html")->as_string;
+    my $uri = URI::file->new_abs("t/assets/meta_format_01.html")->as_string;
 
     # load initial page
     $mech->get( $uri );
@@ -31,3 +26,6 @@ else{
     ok( $mech->content =~ /test ok\./, "result html" );
 }
 
+done_testing;
+
+__END__

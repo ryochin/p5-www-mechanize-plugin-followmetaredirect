@@ -1,8 +1,7 @@
-#!/usr/bin/perl --
-# 
-# $Id$
+#!/usr/bin/env perl
 
 use strict;
+use warnings;
 use File::Spec;
 use IO::File;
 
@@ -17,6 +16,10 @@ my @t = (
   q|<meta http-equiv="Refresh" content="URL=result.html" />|,
   q|<meta http-equiv="Refresh" content="0;url=./result.html" />|,
   q|<meta http-equiv="Refresh" content="0;url=result.html?q=user%20example.com+perl&amp;foo=bar" />|,    # skip test
+  q|<meta http-equiv="Refresh" content='0;url=result.html' />|,
+  q|<meta http-equiv="Refresh" content='0;url="result.html"' />|,
+  q|<meta http-equiv="refresh" content="0; url='result.html'" />|,
+  q|<meta http-equiv="refresh" content="0; url=&#39;result.html&#39;" />|,
 );
 
 my $html = do { local $/; <DATA> };
@@ -25,7 +28,7 @@ my $n = 0;
 for my $t( @t ){
   $n++;
   next if $n == 1;    # for complicated html
-  my $file = File::Spec->join("t", sprintf "meta_format_%02d.html", $n);
+  my $file = File::Spec->join("t", "assets", sprintf "meta_format_%02d.html", $n);
 
   my $fh = IO::File->new;
   $fh->open("> $file") or die $!;
