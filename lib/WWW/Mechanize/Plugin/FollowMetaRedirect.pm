@@ -7,7 +7,7 @@ use warnings;
 use vars qw($VERSION);
 use HTML::TokeParser;
 
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 sub init {
     no strict 'refs';    ## no critic

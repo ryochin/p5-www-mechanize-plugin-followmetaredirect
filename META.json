@@ -27,7 +27,7 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "Test::More" : "0",
+            "Test::More" : "0.88",
             "Time::HiRes" : "0",
             "URI" : "0"
          }
@@ -66,5 +66,5 @@
          "web" : "https://github.com/ryochin/p5-www-mechanize-plugin-followmetaredirect"
       }
    },
-   "version" : "0.01"
+   "version" : "0.02"
 }
