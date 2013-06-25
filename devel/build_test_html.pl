@@ -1,8 +1,7 @@
-#!/usr/bin/perl --
-# 
-# $Id$
+#!/usr/bin/env perl
 
 use strict;
+use warnings;
 use File::Spec;
 use IO::File;
 
@@ -17,6 +16,10 @@ my @t = (
   q|<meta http-equiv="Refresh" content="URL=result.html" />|,
   q|<meta http-equiv="Refresh" content="0;url=./result.html" />|,
   q|<meta http-equiv="Refresh" content="0;url=result.html?q=user%20example.com+perl&amp;foo=bar" />|,    # skip test
+  q|<meta http-equiv="Refresh" content='0;url=result.html' />|,
+  q|<meta http-equiv="Refresh" content='0;url="result.html"' />|,
+  q|<meta http-equiv="refresh" content="0; url='result.html'" />|,
+  q|<meta http-equiv="refresh" content="0; url=&#39;result.html&#39;" />|,
 );
 
 my $html = do { local $/; <DATA> };

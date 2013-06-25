@@ -46,7 +46,7 @@ sub _extract {
     if( $token->[0] eq 'S' and $token->[1] eq 'meta' ){
 	if( defined $token->[2] and ref $token->[2] eq 'HASH' ){
 	    if( defined $token->[2]->{'http-equiv'} and $token->[2]->{'http-equiv'} =~ /^refresh$/io ){
-		if( defined $token->[2]->{'content'} and $token->[2]->{'content'} =~ m|^(([0-9]+)\s*;\s*)*url\=(.+)$|io ){
+		if( defined $token->[2]->{'content'} and $token->[2]->{'content'} =~ m|^(([0-9]+)\s*;\s*)*url\='?([^']+)'?$|io ){
 		    return ($3, $2);
 		}
 	    }

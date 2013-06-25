@@ -10,7 +10,7 @@ BEGIN {
 }
 
 # success
-for my $n( 1 .. 8, 21 ){
+for my $n( 1 .. 13, 21 ){
   my $mech = WWW::Mechanize->new;
   my $uri = URI::file->new_abs( sprintf "t/assets/meta_format_%02d.html", $n )->as_string;
 
