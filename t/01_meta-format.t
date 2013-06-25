@@ -12,7 +12,7 @@ BEGIN {
 # success
 for my $n( 1 .. 8, 21 ){
   my $mech = WWW::Mechanize->new;
-  my $uri = URI::file->new_abs( sprintf "t/meta_format_%02d.html", $n )->as_string;
+  my $uri = URI::file->new_abs( sprintf "t/assets/meta_format_%02d.html", $n )->as_string;
 
   # load initial page
   $mech->get( $uri );
@@ -29,7 +29,7 @@ for my $n( 1 .. 8, 21 ){
 # failure
 for my $n( 22 .. 23 ){
   my $mech = WWW::Mechanize->new;
-  my $uri = URI::file->new_abs( sprintf "t/meta_format_%02d.html", $n )->as_string;
+  my $uri = URI::file->new_abs( sprintf "t/assets/meta_format_%02d.html", $n )->as_string;
 
   # load initial page
   $mech->get( $uri );

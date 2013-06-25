@@ -12,7 +12,7 @@ else{
     can_ok( 'WWW::Mechanize', 'follow_meta_redirect' );
 
     my $mech = WWW::Mechanize::Pluggable->new;
-    my $uri = URI::file->new_abs("t/meta_format_01.html")->as_string;
+    my $uri = URI::file->new_abs("t/assets/meta_format_01.html")->as_string;
 
     # load initial page
     $mech->get( $uri );

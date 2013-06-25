@@ -25,7 +25,7 @@ my $n = 0;
 for my $t( @t ){
   $n++;
   next if $n == 1;    # for complicated html
-  my $file = File::Spec->join("t", sprintf "meta_format_%02d.html", $n);
+  my $file = File::Spec->join("t", "assets", sprintf "meta_format_%02d.html", $n);
 
   my $fh = IO::File->new;
   $fh->open("> $file") or die $!;

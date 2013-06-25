@@ -13,7 +13,7 @@ BEGIN {
 # active check 1
 {
   my $mech = WWW::Mechanize->new;
-  my $uri = URI::file->new_abs("t/waiting_01.html")->as_string;
+  my $uri = URI::file->new_abs("t/assets/waiting_01.html")->as_string;
 
   # load initial page
   $mech->get( $uri );
@@ -32,7 +32,7 @@ BEGIN {
 # active check 2
 {
   my $mech = WWW::Mechanize->new;
-  my $uri = URI::file->new_abs("t/waiting_01.html")->as_string;
+  my $uri = URI::file->new_abs("t/assets/waiting_01.html")->as_string;
 
   # load initial page
   $mech->get( $uri );
@@ -51,7 +51,7 @@ BEGIN {
 # negative check 1
 {
   my $mech = WWW::Mechanize->new;
-  my $uri = URI::file->new_abs("t/waiting_01.html")->as_string;
+  my $uri = URI::file->new_abs("t/assets/waiting_01.html")->as_string;
 
   # load initial page
   $mech->get( $uri );
