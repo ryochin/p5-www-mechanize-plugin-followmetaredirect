@@ -1,9 +1,6 @@
-# 
-# $Id$
-
 use strict;
 use warnings;
-use Test::More tests => 18;
+use Test::More;
 use URI::file;
 use Time::HiRes qw(time);
 
@@ -70,3 +67,6 @@ BEGIN {
   ok( $mech->content =~ /test ok\./, "result html" );
 }
 
+done_testing;
+
+__END__

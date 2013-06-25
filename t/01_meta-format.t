@@ -1,9 +1,6 @@
-# 
-# $Id$
-
 use strict;
 use warnings;
-use Test::More tests => 47;
+use Test::More;
 use URI::file;
 
 BEGIN {
@@ -46,3 +43,6 @@ for my $n( 22 .. 23 ){
   ok( $mech->content !~ /test ok\./, "result html not loaded: $n" );
 }
 
+done_testing;
+
+__END__

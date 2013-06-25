@@ -1,6 +1,3 @@
-#
-# $Id$
-
 use strict;
 use warnings;
 use Test::More;
@@ -15,3 +12,6 @@ if ($ENV{PERL_TEST_CRITIC}) {
   plan skip_all => "define PERL_TEST_CRITIC to run these tests";
 }
 
+done_testing;
+
+__END__
