@@ -4,7 +4,7 @@
       "Ryo Okamoto <ryo@aquahill.net>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v0.4.4, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Minilla/v0.5.3, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -66,5 +66,5 @@
          "web" : "https://github.com/ryochin/p5-www-mechanize-plugin-followmetaredirect"
       }
    },
-   "version" : "0.02"
+   "version" : "0.03"
 }

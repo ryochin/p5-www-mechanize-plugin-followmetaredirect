@@ -16,7 +16,7 @@ use CPAN::Meta;
 use CPAN::Meta::Prereqs;
 
 my %args = (
-    license              => 'perl',
+    license              => 'perl_5',
     dynamic_config       => 0,
 
     configure_requires => {
@@ -25,7 +25,7 @@ my %args = (
 
     name            => 'WWW-Mechanize-Plugin-FollowMetaRedirect',
     module_name     => 'WWW::Mechanize::Plugin::FollowMetaRedirect',
-    allow_pure_perl => 0,
+    allow_pureperl => 0,
 
     script_files => [glob('script/*'), glob('bin/*')],
 
