@@ -22,7 +22,7 @@ BEGIN {
   # follow
   my $start = time;
   ok( $mech->follow_meta_redirect, "follow meta refresh link" );
-  ok( time - $start >= 1.00, "waiting sec" );
+  ok( time - $start >= ( $^O eq 'MSWin32' ? 0.95 : 1.00 ), "waiting sec" );    # win32 doesn't count extact 1.0 sec :(
 
   # check
   ok( $mech->is_html, "is html" );
@@ -41,7 +41,7 @@ BEGIN {
   # follow
   my $start = time;
   ok( $mech->follow_meta_redirect( ignore_wait => 0 ), "follow meta refresh link" );
-  ok( time - $start >= 1.00, "waiting sec" );
+  ok( time - $start >= ( $^O eq 'MSWin32' ? 0.95 : 1.00 ), "waiting sec" );
 
   # check
   ok( $mech->is_html, "is html" );
